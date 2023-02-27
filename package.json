@@ -9,5 +9,9 @@
   },
   "devDependencies": {
     "nuxt": "^3.2.2"
+  },
+  "dependencies": {
+    "bulma": "^0.9.4",
+    "sass": "^1.58.3"
   }
 }
