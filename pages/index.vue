@@ -7,14 +7,10 @@
 const config = useRuntimeConfig().public;
 const products = ref('');
 
-const get = async () => {
-  const { data, error } = await useFetch(`${config.MEDUSA_API}/store/products`);
-  products.value = data.value;
-}
-
 onMounted(async () => {
   setTimeout(async () => {
-    await get();
+    const { data, error } = await useFetch(`${config.MEDUSA_API}/store/products`);
+    products.value = data.value;
   }, 0)
 })
 </script>
