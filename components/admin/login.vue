@@ -54,7 +54,7 @@ const loggedIn = useLogin();
 
 const email = ref('');
 const pwd = ref('');
-const adminEmail = ref('admin@jas.io');
+const adminEmail = ref('admin@email.com');
 const adminPwd = ref('admin123');
 
 const close = () => {

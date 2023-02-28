@@ -18,6 +18,7 @@
 
 <script setup>
 const loggedIn = useLogin();
+
 const logout = () => {
   loggedIn.value = false;
   sessionStorage.setItem("loggedIn", `${loggedIn.value}`);
