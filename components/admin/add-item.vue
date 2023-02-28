@@ -2,8 +2,26 @@
   <div class="panel m-6">
     <p class="panel-heading">Add Housing</p>
     <div class="panel-block">
+      <div class="file has-name is-fullwidth">
+        <label class="file-label">
+          <input @change="handleFile" class="file-input" type="file" name="resume">
+          <span class="file-cta">
+            <span class="file-icon">
+              <i class="fas fa-upload"></i>
+            </span>
+            <span class="file-label">
+              Choose a file…
+            </span>
+          </span>
+          <span class="file-name">
+            {{ fileName }}
+          </span>
+        </label>
+      </div>
+    </div>
+    <div class="panel-block">
       <label class="checkbox">
-        <input type="checkbox">
+        <input v-model="type" type="checkbox">
         Grounded
       </label>
     </div>
@@ -11,7 +29,7 @@
       <div>
         <div class="m-1">Suitable for animals (multiselect):</div>
         <div class="select is-multiple is-fullwidth">
-          <select multiple size="8">
+          <select v-model="animals" multiple size="8">
             <option value="cats">Cats</option>
             <option value="dogs">Dogs</option>
             <option value="birds">Birds</option>
@@ -21,18 +39,57 @@
       </div>
     </div>
     <div class="panel-block">
-      <textarea class="textarea" placeholder="Add detailed housing description here..."></textarea>
+      <textarea v-model="description" class="textarea" placeholder="Add detailed housing description here..."></textarea>
     </div>
     <div class="panel-block">
       <div>Price (PLN)</div>
-      <input class="input" type="number" value="1500">
+      <input v-model="price" class="input" type="number">
     </div>
     <div class="panel-block">
       <p class="control">
-        <button @click="" class="button is-success">
+        <button @click="preview" class="button is-success">
           Preview
         </button>
       </p>
     </div>
   </div>
+  <AdminPreview
+      v-if="showPreview"
+      :file="file"
+      :grounded="type"
+      :animals="animals"
+      :description="description"
+      :price="price"
+      @closePreview="closePreview"/>
 </template>
+
+<script setup>
+const file = ref(undefined);
+const fileName = ref('Pick a file...');
+const type = ref(false);
+const animals = ref([]);
+const animalArr = ref([]);
+const description = ref('');
+const price = ref(0);
+const showPreview = ref(false);
+
+const handleFile = (event) => {
+  if (!!event.target.files[0]) {
+    file.value = event.target.files[0];
+    fileName.value = file.value.name;
+  }
+}
+
+const preview = () => {
+  // console.log('File:', file.value);
+  // console.log('Type:', type.value);
+  // console.log('Animals:', animalArr.value);
+  // console.log('Desc:', description.value);
+  // console.log('Price:', price.value);
+  showPreview.value = true;
+}
+
+const closePreview = () => {
+  showPreview.value = false;
+}
+</script>
