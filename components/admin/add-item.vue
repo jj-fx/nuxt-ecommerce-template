@@ -65,10 +65,9 @@
 
 <script setup>
 const file = ref(undefined);
-const fileName = ref('Pick a file...');
+const fileName = ref('no file selected...');
 const type = ref(false);
 const animals = ref([]);
-const animalArr = ref([]);
 const description = ref('');
 const price = ref(0);
 const showPreview = ref(false);
@@ -81,11 +80,6 @@ const handleFile = (event) => {
 }
 
 const preview = () => {
-  // console.log('File:', file.value);
-  // console.log('Type:', type.value);
-  // console.log('Animals:', animalArr.value);
-  // console.log('Desc:', description.value);
-  // console.log('Price:', price.value);
   showPreview.value = true;
 }
 

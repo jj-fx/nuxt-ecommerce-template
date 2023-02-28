@@ -36,7 +36,7 @@
           </div>
           <div class="field">
             <p class="control">
-              <button @click="login" class="button is-success">
+              <button @click.prevent="login" class="button is-success">
                 Login
               </button>
             </p>
@@ -63,7 +63,7 @@ const close = () => {
 
 const login = () => {
   if (email.value !== adminEmail.value || pwd.value !== adminPwd.value) {
-    console.log('Access Denied: incorrect email');
+    console.warn('Access Denied: incorrect email');
     return null;
   }
   loggedIn.value = true;

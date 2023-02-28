@@ -42,7 +42,7 @@
       <div class="card-content">
         <div>
           <button @click="$emit('closePreview')" class="button is-warning">Go Back...</button>
-          <button class="button is-info is-pulled-right">I'm done! Save!</button>
+          <button @click="saveItemToDB" class="button is-info is-pulled-right">I'm done! Save!</button>
         </div>
       </div>
 
@@ -52,8 +52,8 @@
 </template>
 
 <script setup>
-// const animals = ['cats', 'dogs']
 const sourceImage = ref(undefined);
+const config = useRuntimeConfig().public;
 
 const props = defineProps({
   file: File,
@@ -62,6 +62,21 @@ const props = defineProps({
   description: String,
   price: Number
 })
+
+async function saveItemToDB() {
+  const { data, error } = await useFetch(`${config.STORE_API}/add`, {
+    method: 'POST',
+    cors: 'no-cors',
+    body: {
+      file: props.file,
+      overground: props.grounded,
+      animals: props.animals,
+      description: props.description,
+      price: props.price
+    }
+  })
+  console.log(data.value);
+}
 
 onMounted(() => {
   if (props.file) sourceImage.value = URL.createObjectURL(props.file)

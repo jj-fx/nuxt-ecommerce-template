@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
     runtimeConfig: {
         public: {
-            MEDUSA_API: process.env.MEDUSA_API || 'http://127.0.0.1:9000'
+            STORE_API: process.env.STORE_API || 'http://localhost:5000'
         }
     },
     css: [
